@@ -4,7 +4,10 @@ import io
 import pytesseract
 
 def handler(event):
-    image_b64 = event.get("image_base64")
+    # event['input'] contém seu payload
+    input_data = event.get("input", {})
+    image_b64 = input_data.get("image_base64")
+
     if not image_b64:
         return {"error": "Imagem base64 não enviada"}
 
@@ -13,6 +16,4 @@ def handler(event):
 
     text = pytesseract.image_to_string(image)
 
-    return {
-        "output": text.strip()
-    }
+    return {"text": text.strip()}

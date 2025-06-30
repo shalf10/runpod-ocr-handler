@@ -1,4 +1,4 @@
-FROM runpod/pytorch:2.1.0-py3.10-cuda12.1.0-devel
+FROM runpod/serverless:3.10-pytorch-2.1.0-cuda12.1
 
 WORKDIR /app
 

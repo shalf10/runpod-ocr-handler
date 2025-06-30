@@ -1,19 +1,21 @@
 from PIL import Image
 import base64
 import io
-import pytesseract
+
+def base64_to_image(image_base64):
+    image_data = base64.b64decode(image_base64)
+    return Image.open(io.BytesIO(image_data))
 
 def handler(event):
-    # event['input'] contém seu payload
-    input_data = event.get("input", {})
-    image_b64 = input_data.get("image_base64")
+    prompt = event["input"].get("prompt")
+    image_base64 = event["input"].get("image_base64")
+    image = base64_to_image(image_base64)
 
-    if not image_b64:
-        return {"error": "Imagem base64 não enviada"}
+    # Agora passe `image` e `prompt` para o modelo multimodal
+    output = model.chat(
+        image=image,
+        messages=[{"role": "user", "content": prompt}]
+    )
 
-    image_bytes = base64.b64decode(image_b64)
-    image = Image.open(io.BytesIO(image_bytes))
-
-    text = pytesseract.image_to_string(image)
-
-    return {"text": text.strip()}
+    return output
+    

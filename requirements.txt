@@ -3,4 +3,3 @@ torch
 pillow
 accelerate
 einops
-sentencepiece

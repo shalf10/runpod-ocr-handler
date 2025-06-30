@@ -1,3 +1,18 @@
-handler: handler.handler
-name: ocr-handler
-gpu: false
+name: vision-handler
+image: runpod/pytorch:2.1.0-py3.10-cuda12.1.0-devel
+gpu: true
+handler: handler.py
+accelerator: A100
+input_schema:
+  type: object
+  properties:
+    input:
+      type: object
+      properties:
+        prompt:
+          type: string
+        image_base64:
+          type: string
+      required:
+        - prompt
+        - image_base64

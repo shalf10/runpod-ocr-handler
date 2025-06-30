@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM runpod/pytorch:2.1.0-py3.10-cuda12.1.0-devel
 
 WORKDIR /app
 

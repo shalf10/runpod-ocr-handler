@@ -1,4 +1,4 @@
-name: vision-handler
+name: qwen-vl-endpoint
 image: runpod/pytorch:2.1.0-py3.10-cuda12.1.0-devel
 gpu: true
 handler: handler.py
